@@ -7,7 +7,7 @@ var engine, world;
 var backgroundImg;
 
 var bg ;
-
+var hour;
 function preload() {
     // create getBackgroundImg( ) here
     getBackgroundImg();
@@ -29,7 +29,14 @@ function draw(){
     Engine.update(engine);
 
     // write code to display time in correct format here
-   
+    textSize(35);
+    if(hour>=12){
+        text("Time : "+ hour%12 + " PM", 50,100);
+       }else if(hour==0){
+         text("Time : 12 AM",100,100);
+       }else{
+        text("Time : "+ hour%12 + " AM", 50,100);
+       }
 
 }
 
@@ -43,22 +50,27 @@ async function getBackgroundImg(){
     console.log(responseJSON);
     var datetime=responseJSON.datetime;
     // write code slice the datetime
-    var hour=datetime.slice(11,13);
+     hour=datetime.slice(11,13);
 
     // add conditions to change the background images from sunrise to sunset
     if(hour>=04&&hour<=06){
+        //debugger;
         bg="sunrise1.png";
     }
     else if(hour>=06&&hour<=08){
+        //debugger;
         bg="sunrise2.png";
     }
     else if(hour>=23&&hour==0){
+       // debugger;
         bg="sunset10.png";
     }
     else if(hour>=0&&hour<=03){
+       // debugger;
         bg="sunset11.png";
     }
     else{
+      //  debugger;
         bg="sunset12.png";
     }
 
